@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Quantum DevOps @ QEX.">
+        <meta name="author" content="QEX">
+        <link rel="canonical" href="https://www.mkdocs.org/">
+        <link rel="shortcut icon" href="img/favicon.ico">
+        <title>QEX QuantumDevOps</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/fontawesome.min.css" rel="stylesheet">
+        <link href="css/brands.min.css" rel="stylesheet">
+        <link href="css/solid.min.css" rel="stylesheet">
+        <link href="css/v4-font-face.min.css" rel="stylesheet">
+        <link href="css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/django.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-274394082"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', "G-274394082");
+        </script> 
+    </head>
+
+    <body class="homepage">
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href=".">QEX QuantumDevOps</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="." class="nav-link active" aria-current="page">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Dev</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="dev/" class="dropdown-item">Development of Quantum Software</a>
+</li>
+                                    
+<li>
+    <a href="dev/plan/" class="dropdown-item">Plan</a>
+</li>
+                                    
+<li>
+    <a href="dev/code/" class="dropdown-item">Code</a>
+</li>
+                                    
+<li>
+    <a href="dev/build/" class="dropdown-item">Build</a>
+</li>
+                                    
+<li>
+    <a href="dev/test/" class="dropdown-item">Test</a>
+</li>
+                                    
+<li>
+    <a href="dev/release/" class="dropdown-item">Release</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Ops</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="ops/" class="dropdown-item">Operation of Quantum Software</a>
+</li>
+                                    
+<li>
+    <a href="ops/evaluate/" class="dropdown-item">Evaluate</a>
+</li>
+                                    
+<li>
+    <a href="ops/deploy/" class="dropdown-item">Deploy</a>
+</li>
+                                    
+<li>
+    <a href="ops/monitor/" class="dropdown-item">Monitor</a>
+</li>
+                                    
+<li>
+    <a href="ops/feedback/" class="dropdown-item">Feedback</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="dev/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#quex-quantum-devops" class="nav-link">QUEX Quantum DevOps</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#qex" class="nav-link">QEX</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#what-is-devops" class="nav-link">What is DevOps?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#core-principles" class="nav-link">Core Principles</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#key-benefits" class="nav-link">Key Benefits</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#typical-toolchain-examples" class="nav-link">Typical Toolchain (examples)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#simple-adoption-steps" class="nav-link">Simple Adoption Steps</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="quex-quantum-devops">QUEX Quantum DevOps</h1>
+<h2 id="qex">QEX</h2>
+<p>QEX (Quantum Excellence Centre) is a European Quantum Centre of Excellence funded by the EuroHPC Joint Undertaking, bringing together leading research institutions and national ecosystems across Europe to accelerate quantum‑computing research and its translation into industrial applications. QEX is anchored at the University of Southern Denmark’s Center for Quantum Mathematics, providing a one‑stop hub where scientists, engineers, companies and policymakers can collaborate, share tools and develop quantum‑enhanced solutions for sectors such as finance, pharma and climate modelling. Its mission is to strengthen Europe’s leadership in quantum technologies by offering shared expertise, training programmes and access to high‑performance quantum resources, effectively connecting Europe for quantum excellence.</p>
+<h2 id="what-is-devops">What is DevOps?</h2>
+<p>A cultural and professional movement that merges software development (Dev) and IT operations (Ops) to deliver software faster, more reliably, and with continuous feedback.</p>
+<p><img alt="quex_devops" src="qdevops.png" /></p>
+<h2 id="core-principles">Core Principles</h2>
+<table>
+<thead>
+<tr>
+<th>Principle</th>
+<th>Brief Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Collaboration</strong></td>
+<td>Developers, ops, QA and security work together from the start.</td>
+</tr>
+<tr>
+<td><strong>Automation</strong></td>
+<td>Build, test, deployment, and monitoring are automated to reduce manual errors.</td>
+</tr>
+<tr>
+<td><strong>Continuous Integration (CI)</strong></td>
+<td>Code changes are merged frequently and automatically tested.</td>
+</tr>
+<tr>
+<td><strong>Continuous Delivery (CD)</strong></td>
+<td>Every change can be released to production through a repeatable pipeline.</td>
+</tr>
+<tr>
+<td><strong>Infrastructure as Code (IaC)</strong></td>
+<td>Infrastructure is defined in version‑controlled code.</td>
+</tr>
+<tr>
+<td><strong>Monitoring &amp; Feedback</strong></td>
+<td>Real‑time metrics from production guide future development.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="key-benefits">Key Benefits</h2>
+<ul>
+<li><strong>Faster time‑to‑market</strong> – Shorter release cycles.  </li>
+<li><strong>Higher quality</strong> – Automated testing catches bugs early.  </li>
+<li><strong>Improved reliability</strong> – IaC and automated rollbacks reduce downtime.  </li>
+<li><strong>Cost efficiency</strong> – Less manual effort and fewer production incidents.</li>
+</ul>
+<h2 id="typical-toolchain-examples">Typical Toolchain (examples)</h2>
+<ul>
+<li><strong>Source control:</strong> Git, GitHub, GitLab  </li>
+<li><strong>CI/CD pipelines:</strong> Jenkins, GitHub Actions, GitLab CI, CircleCI  </li>
+<li><strong>Containers:</strong> Docker, Kubernetes  </li>
+<li><strong>IaC:</strong> Terraform, Ansible, CloudFormation  </li>
+<li><strong>Monitoring:</strong> Prometheus, Grafana, ELK stack  </li>
+</ul>
+<h2 id="simple-adoption-steps">Simple Adoption Steps</h2>
+<ol>
+<li>Map current workflow and identify bottlenecks.  </li>
+<li>Form cross‑functional teams.  </li>
+<li>Store all code and configuration in version control.  </li>
+<li>Set up an automated CI pipeline with unit tests.  </li>
+<li>Extend to CD: automated staging deployment, manual approval for production.  </li>
+<li>Introduce IaC for reproducible environments.  </li>
+<li>Add monitoring and iterate based on feedback.</li>
+</ol></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = ".",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="js/base.js"></script>
+
+        <div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
+
+<!--
+MkDocs version : 1.6.1
+Build Date UTC : 2026-07-02 19:11:11.719806+00:00
+-->
