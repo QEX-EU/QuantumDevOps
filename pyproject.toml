@@ -1,0 +1,58 @@
+# see documentation, e.g.
+# - https://packaging.python.org/en/latest/specifications/declaring-project-metadata/#declaring-project-metadata
+# - https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+# - https://www.python.org/dev/peps/pep-0621/
+
+[build-system]
+requires = ["setuptools>=64.0.0", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+    { name = "QEX", email = "nicolas.gm.renaud@gmail.com" }
+]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "mkdocs",
+    "mkdocs-jupyter",
+    "mkdocs-literate-nav",
+    ]
+description = "QEX QuantumDevOps"
+keywords = ["quantum devops"]
+license = {file = "LICENSE"}
+name = "qdevops"
+readme = {file = "README.md", content-type = "text/markdown"}
+requires-python = ">=3.8"
+version = "0.1.0"
+
+[project.optional-dependencies]
+dev = [
+    "build",  # build is not only used in publishing (below), but also in the template's test suite
+    "bump-my-version",
+    "ruff",
+    "tox",
+    "myst_parser",
+]
+publishing = [
+    "build",
+    "twine",
+    "wheel",
+]
+
+[project.urls]
+Repository = "https://github.com/https://github.com/QEX-EU/T4.5"
+Issues = "https://github.com/https://github.com/QEX-EU/T4.5/issues"
+
+
+
+
