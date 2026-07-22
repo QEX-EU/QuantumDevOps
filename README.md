@@ -1,16 +1,16 @@
 # Quantum Dev Ops Guide Book
 
-To contribute to the book
+<p align="center">
+  <a href="https://qex-eu.github.io/QuantumDevOps/">
+<img style="min-width: 200px !important; width: 30%;" alt="Static Badge" src="https://img.shields.io/badge/documentation-black?style=for-the-badge&logo=gitbook&logoColor=white&link=https%3A%2F%2Fqex-eu.github.io%2FQuantumDevOps%2F">
+  </a>
+</p>
 
-1. Clone the repo: `git clone https://github.com/QEX-EU/QuantumDevOps`
-2. Change directory `cd QuantumDevOps`
-3. Install dependencies: `uv pip install mkdocs mkdocs-jupyter mkdocs-literate-nav"`
-4. Launch mkdocs: `mkdocs serve`
+This repository contains guidelines to realize QuantumDevOps.
 
-This will launch the guide in a webbrowser. You can edit/add  markdown files and it will autorefreseh. 
-Once you are happy with your changes commit upload them: `mkdocs gh-deploy`
-Don't forget to commit your changes to the repo as well.
+To contribute to the book, see [How to contribute](CONTRIBUTING.md#how-to-contribute)
 
+<!--
 # QEX - Task 4.5: QuantumDevOps
 
 Here we collect ideas for tools to be used in the QuantumDevOps workflow, so to discuss them during TEM.
@@ -40,3 +40,4 @@ So far we have:
 ## General Remarks
 
 The tools we identify should be able to be or become coding language agnostic.
+-->

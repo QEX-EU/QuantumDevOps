@@ -17,9 +17,15 @@ If you're unsure whether your idea fits, open a Discussion before writing it up.
 ## How to contribute
 
 1. **Fork** the repository and create a branch from `main`.
-2. **Add or edit** a Markdown file in the appropriate folder. Follow the file naming convention already in use (lowercase, hyphens for spaces, `.md` extension).
-3. **Write clearly.** Assume the reader knows the basics of quantum computing but may be new to DevOps integration. Use plain language, short paragraphs, and concrete examples where possible.
-4. **Open a pull request** with a short title describing what you added or changed. In the PR description, explain the "why" — what problem does this practice solve, or what gap does it fill?
+2. **Clone the repo** `git clone https://github.com/{owner}/QuantumDevOps
+3. **Change directory** `cd QuantumDevOps`
+4. **Install `uv` package manager** https://docs.astral.sh/uv/getting-started/installation/
+5. **Install dependencies** `uv pip install mkdocs mkdocs-jupyter mkdocs-literate-nav"`
+6. **Launch** `mkdocs serve`. This will launch the guide in a web browser.
+7. **Add or edit** a Markdown file in the appropriate folder; `mkdocs` will autorefresh. Follow the file naming convention already in use (lowercase, hyphens for spaces, `.md` extension).
+8. **Write clearly.** Assume the reader knows the basics of quantum computing but may be new to DevOps integration. Use plain language, short paragraphs, and concrete examples where possible.
+9. **Commit and push** Once happy, `git commit` your changes and `git push` to the remote repository.
+10. **Open a pull request** with a short title describing what you added or changed. In the PR description, explain the "why" — what problem does this practice solve, or what gap does it fill?
 
 ## Style guide
 
