@@ -8,6 +8,134 @@ The eScience Center Python template is a Cookiecutter‑based starter kit that
 
 [Get Started](https://github.com/NLeSC/python-template) -->
 
+
+# Major Quantum Computing Libraries
+
+Most libraries are Python packages for building circuits, simulating them, and running them on hardware. The examples below all prepare a two-qubit Bell state, (|00⟩ + |11⟩)/√2, and sample it 1000 times. Ideal results show only `00` and `11`, each roughly half the time. Library APIs change between releases, so check the documentation for the version you pin.
+
+| Library | Maintainer | Focus | Install |
+|---|---|---|---|
+| [Qiskit](https://qiskit.org) | IBM | General circuit programming, transpilation, IBM hardware | `pip install qiskit` |
+| [Cirq](https://quantumai.google/cirq) | Google | NISQ circuits with explicit hardware-aware qubit layouts | `pip install cirq` |
+| [PennyLane](https://pennylane.ai) | Xanadu | Quantum machine learning, differentiable and hybrid programming | `pip install pennylane` |
+| [Amazon Braket SDK](https://github.com/amazon-braket/amazon-braket-sdk-python) | AWS | Access to multiple hardware vendors and simulators via AWS | `pip install amazon-braket-sdk` |
+| [CUDA-Q](https://nvidia.github.io/cuda-quantum/) | NVIDIA | GPU-accelerated simulation, hybrid quantum-classical HPC workflows | `pip install cudaq` |
+| [Qibo](https://qibo.science) | Qibo community | Simulation, hardware control, and optimization | `pip install qibo` |
+| [Qrisp](https://qrisp.eu) | Fraunhofer FOKUS | High-level programming with quantum variables, automatic uncomputation, and compilation | `pip install qrisp` |
+
+=== "Qiskit"
+
+    ```python
+    from qiskit import QuantumCircuit
+    from qiskit.primitives import StatevectorSampler
+
+    qc = QuantumCircuit(2, 2)
+    qc.h(0)
+    qc.cx(0, 1)
+    qc.measure([0, 1], [0, 1])
+
+    result = StatevectorSampler().run([qc], shots=1000).result()
+    print(result[0].data.c.get_counts())  # e.g. {'00': 507, '11': 493}
+    ```
+
+=== "Cirq"
+
+    ```python
+    import cirq
+
+    q0, q1 = cirq.LineQubit.range(2)
+    circuit = cirq.Circuit(
+        cirq.H(q0),
+        cirq.CNOT(q0, q1),
+        cirq.measure(q0, q1, key="m"),
+    )
+
+    result = cirq.Simulator().run(circuit, repetitions=1000)
+    print(result.histogram(key="m"))  # Counter({0: ~500, 3: ~500})
+    ```
+
+=== "PennyLane"
+
+    ```python
+    import pennylane as qml
+
+    dev = qml.device("default.qubit", wires=2, shots=1000)
+
+    @qml.qnode(dev)
+    def bell():
+        qml.Hadamard(wires=0)
+        qml.CNOT(wires=[0, 1])
+        return qml.counts()
+
+    print(bell())  # e.g. {'00': 498, '11': 502}
+    ```
+
+=== "Amazon Braket"
+
+    ```python
+    from braket.circuits import Circuit
+    from braket.devices import LocalSimulator
+
+    circuit = Circuit().h(0).cnot(0, 1)
+
+    result = LocalSimulator().run(circuit, shots=1000).result()
+    print(result.measurement_counts)  # e.g. Counter({'00': 505, '11': 495})
+    ```
+
+    Replace `LocalSimulator()` with `AwsDevice(<device ARN>)` to run on a managed simulator or on quantum hardware (requires an AWS account).
+
+=== "CUDA-Q"
+
+    ```python
+    import cudaq
+
+    @cudaq.kernel
+    def bell():
+        q = cudaq.qvector(2)
+        h(q[0])
+        x.ctrl(q[0], q[1])
+        mz(q)
+
+    print(cudaq.sample(bell, shots_count=1000))  # { 00:~500 11:~500 }
+    ```
+
+=== "Qibo"
+
+    ```python
+    from qibo import Circuit, gates
+
+    c = Circuit(2)
+    c.add(gates.H(0))
+    c.add(gates.CNOT(0, 1))
+    c.add(gates.M(0, 1))
+
+    result = c(nshots=1000)
+    print(result.frequencies())  # e.g. Counter({'00': 503, '11': 497})
+    ```
+
+=== "Qrisp"
+
+    ```python
+    from qrisp import QuantumVariable, h, cx
+
+    qv = QuantumVariable(2)
+    h(qv[0])
+    cx(qv[0], qv[1])
+
+    print(qv.get_measurement(shots=1000))  # e.g. {'00': 0.51, '11': 0.49}
+    ```
+
+    Qrisp works at a higher level of abstraction than gate-by-gate circuits: `QuantumVariable`s can represent integers, floats, or custom types, and the compiler handles qubit allocation and automatic uncomputation of temporary values. Note that results are returned as probabilities rather than raw counts.
+
+## Choosing a Library
+
+- **Targeting a specific hardware provider:** use that provider's native stack (Qiskit for IBM, Braket for AWS-hosted devices), or a plugin that bridges to it.
+- **Variational algorithms and quantum machine learning:** PennyLane offers automatic differentiation and integrates with PyTorch, JAX, and TensorFlow.
+- **Large-scale simulation on GPUs or HPC systems:** CUDA-Q (and GPU-enabled backends in other libraries) are designed for this.
+- **High-level, structured quantum programming:** Qrisp lets you write algorithms in terms of quantum variables and functions, leaving allocation and uncomputation to the compiler.
+- **Portability:** keep library-specific code behind a thin interface, and consider exchanging circuits as OpenQASM so you can switch libraries later.
+
+
 # Best Practices for Quantum Software
 
 Quantum programs are still software: everything above applies. Quantum hardware and simulators add constraints (probabilistic outputs, noise, limited qubits, no state copying or inspection on real devices) that call for a few extra programming habits. This section focuses on how to write the code itself.
@@ -539,131 +667,7 @@ Each tab below shows a small example for the matching bullet.
 
     This example continues the first tab. The file records the library versions, backend, shots, seed, transpiler settings, and mitigation next to the raw counts. For hardware runs, also store the job ID and the date, since the calibration data changes between runs. Never store credentials in this record.
 
-# Major Quantum Computing Libraries
 
-Most libraries are Python packages for building circuits, simulating them, and running them on hardware. The examples below all prepare a two-qubit Bell state, (|00⟩ + |11⟩)/√2, and sample it 1000 times. Ideal results show only `00` and `11`, each roughly half the time. Library APIs change between releases, so check the documentation for the version you pin.
-
-| Library | Maintainer | Focus | Install |
-|---|---|---|---|
-| [Qiskit](https://qiskit.org) | IBM | General circuit programming, transpilation, IBM hardware | `pip install qiskit` |
-| [Cirq](https://quantumai.google/cirq) | Google | NISQ circuits with explicit hardware-aware qubit layouts | `pip install cirq` |
-| [PennyLane](https://pennylane.ai) | Xanadu | Quantum machine learning, differentiable and hybrid programming | `pip install pennylane` |
-| [Amazon Braket SDK](https://github.com/amazon-braket/amazon-braket-sdk-python) | AWS | Access to multiple hardware vendors and simulators via AWS | `pip install amazon-braket-sdk` |
-| [CUDA-Q](https://nvidia.github.io/cuda-quantum/) | NVIDIA | GPU-accelerated simulation, hybrid quantum-classical HPC workflows | `pip install cudaq` |
-| [Qibo](https://qibo.science) | Qibo community | Simulation, hardware control, and optimization | `pip install qibo` |
-| [Qrisp](https://qrisp.eu) | Fraunhofer FOKUS | High-level programming with quantum variables, automatic uncomputation, and compilation | `pip install qrisp` |
-
-=== "Qiskit"
-
-    ```python
-    from qiskit import QuantumCircuit
-    from qiskit.primitives import StatevectorSampler
-
-    qc = QuantumCircuit(2, 2)
-    qc.h(0)
-    qc.cx(0, 1)
-    qc.measure([0, 1], [0, 1])
-
-    result = StatevectorSampler().run([qc], shots=1000).result()
-    print(result[0].data.c.get_counts())  # e.g. {'00': 507, '11': 493}
-    ```
-
-=== "Cirq"
-
-    ```python
-    import cirq
-
-    q0, q1 = cirq.LineQubit.range(2)
-    circuit = cirq.Circuit(
-        cirq.H(q0),
-        cirq.CNOT(q0, q1),
-        cirq.measure(q0, q1, key="m"),
-    )
-
-    result = cirq.Simulator().run(circuit, repetitions=1000)
-    print(result.histogram(key="m"))  # Counter({0: ~500, 3: ~500})
-    ```
-
-=== "PennyLane"
-
-    ```python
-    import pennylane as qml
-
-    dev = qml.device("default.qubit", wires=2, shots=1000)
-
-    @qml.qnode(dev)
-    def bell():
-        qml.Hadamard(wires=0)
-        qml.CNOT(wires=[0, 1])
-        return qml.counts()
-
-    print(bell())  # e.g. {'00': 498, '11': 502}
-    ```
-
-=== "Amazon Braket"
-
-    ```python
-    from braket.circuits import Circuit
-    from braket.devices import LocalSimulator
-
-    circuit = Circuit().h(0).cnot(0, 1)
-
-    result = LocalSimulator().run(circuit, shots=1000).result()
-    print(result.measurement_counts)  # e.g. Counter({'00': 505, '11': 495})
-    ```
-
-    Replace `LocalSimulator()` with `AwsDevice(<device ARN>)` to run on a managed simulator or on quantum hardware (requires an AWS account).
-
-=== "CUDA-Q"
-
-    ```python
-    import cudaq
-
-    @cudaq.kernel
-    def bell():
-        q = cudaq.qvector(2)
-        h(q[0])
-        x.ctrl(q[0], q[1])
-        mz(q)
-
-    print(cudaq.sample(bell, shots_count=1000))  # { 00:~500 11:~500 }
-    ```
-
-=== "Qibo"
-
-    ```python
-    from qibo import Circuit, gates
-
-    c = Circuit(2)
-    c.add(gates.H(0))
-    c.add(gates.CNOT(0, 1))
-    c.add(gates.M(0, 1))
-
-    result = c(nshots=1000)
-    print(result.frequencies())  # e.g. Counter({'00': 503, '11': 497})
-    ```
-
-=== "Qrisp"
-
-    ```python
-    from qrisp import QuantumVariable, h, cx
-
-    qv = QuantumVariable(2)
-    h(qv[0])
-    cx(qv[0], qv[1])
-
-    print(qv.get_measurement(shots=1000))  # e.g. {'00': 0.51, '11': 0.49}
-    ```
-
-    Qrisp works at a higher level of abstraction than gate-by-gate circuits: `QuantumVariable`s can represent integers, floats, or custom types, and the compiler handles qubit allocation and automatic uncomputation of temporary values. Note that results are returned as probabilities rather than raw counts.
-
-## Choosing a Library
-
-- **Targeting a specific hardware provider:** use that provider's native stack (Qiskit for IBM, Braket for AWS-hosted devices), or a plugin that bridges to it.
-- **Variational algorithms and quantum machine learning:** PennyLane offers automatic differentiation and integrates with PyTorch, JAX, and TensorFlow.
-- **Large-scale simulation on GPUs or HPC systems:** CUDA-Q (and GPU-enabled backends in other libraries) are designed for this.
-- **High-level, structured quantum programming:** Qrisp lets you write algorithms in terms of quantum variables and functions, leaving allocation and uncomputation to the compiler.
-- **Portability:** keep library-specific code behind a thin interface, and consider exchanging circuits as OpenQASM so you can switch libraries later.
 
 # AI Coding Assistants for Quantum Computing
 
