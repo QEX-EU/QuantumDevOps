@@ -50,6 +50,7 @@ Quantum programs are still software: everything above applies. Quantum hardware 
 - **Visualize and review circuits.** Drawing a circuit is often the quickest way to catch mistakes.
 - **Automate with CI.** Run linting, type checks, and simulator-based tests on every change, and cache or limit expensive runs.
 - **Mind licensing and provenance** of algorithms, datasets, and any third-party quantum libraries you depend on.
+
 # Major Quantum Computing Libraries
 
 Most libraries are Python packages for building circuits, simulating them, and running them on hardware. The examples below all prepare a two-qubit Bell state, (|00⟩ + |11⟩)/√2, and sample it 1000 times. Ideal results show only `00` and `11`, each roughly half the time. Library APIs change between releases, so check the documentation for the version you pin.
@@ -175,3 +176,27 @@ Qrisp works at a higher level of abstraction than gate-by-gate circuits: `Quantu
 - **Large-scale simulation on GPUs or HPC systems:** CUDA-Q (and GPU-enabled backends in other libraries) are designed for this.
 - **High-level, structured quantum programming:** Qrisp lets you write algorithms in terms of quantum variables and functions, leaving allocation and uncomputation to the compiler.
 - **Portability:** keep library-specific code behind a thin interface, and consider exchanging circuits as OpenQASM so you can switch libraries later.
+
+# AI Coding Assistants for Quantum Computing
+
+General-purpose AI coding assistants (GitHub Copilot, Claude Code, ChatGPT, and similar) can speed up quantum software development, but they are weaker here than for mainstream languages. Quantum SDKs are small niches in the training data, their APIs change quickly, and models often produce code that looks plausible but uses removed or renamed functions (for example the pre-1.0 `execute()` and `Aer` workflows or the old `qiskit.providers.ibmq` package in Qiskit). They can also write circuits that run without errors but compute the wrong thing. Treat generated code as a draft: review it, run it on a simulator, and check it against the testing practices above.
+
+## Qiskit Code Assistant and Qiskit LLMs
+
+If you work with Qiskit, use an assistant that has been specialized for it rather than relying only on a general model. IBM and the Qiskit community provide the following:
+
+- **Qiskit Code Assistant.** A code-completion and chat assistant based on IBM Granite models fine-tuned on Qiskit code and documentation. It integrates with VS Code and JupyterLab and is aware of current Qiskit idioms, such as primitives, transpiler passes, and the `qiskit-ibm-runtime` workflow.
+- **Open Qiskit models.** The fine-tuned Granite Qiskit models are published on Hugging Face (under the `Qiskit` organization), so you can run them locally or on your own infrastructure. This matters when code or research must not leave your environment.
+- **Qiskit HumanEval.** A benchmark of Qiskit coding tasks that is used to measure how well a model writes correct Qiskit code. Use it, or a small test set of your own, to compare assistants rather than relying on impressions.
+- **Qiskit MCP servers.** The Model Context Protocol lets general agents such as Claude Code call Qiskit tooling (for example the Code Assistant, transpiler, or IBM Quantum backends) as tools, combining a general-purpose agent with Qiskit-specific knowledge.
+
+Availability, model names, and access requirements change often, so check the [Qiskit documentation](https://docs.quantum.ibm.com) for the current setup.
+
+## Recommendations
+
+- **Prefer a Qiskit-specialized LLM for Qiskit code.** It is less likely to suggest deprecated APIs and is better at idiomatic Qiskit than a general model. Use a general assistant for the surrounding classical code, tests, and documentation.
+- **Give the assistant context.** State the pinned Qiskit version, the target backend, and any constraints (qubit count, connectivity, native gates) in the prompt or in a project instruction file.
+- **Verify every output.** Run generated circuits on an exact simulator, compare against analytical results, and inspect the transpiled circuit. Passing code is not the same as correct physics.
+- **Never paste credentials.** Keep IBM Quantum API tokens and other secrets out of prompts, notebooks shared with assistants, and committed files.
+- **Record AI use in your reproducibility notes.** Note which assistant and model produced or modified significant parts of the code, along with the human review that followed.
+- **Check licensing and data policies.** Know whether your assistant sends code to an external service, and whether that is acceptable for your project.
