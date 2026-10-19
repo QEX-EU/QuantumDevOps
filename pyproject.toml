@@ -26,6 +26,7 @@ dependencies = [
     "mkdocs",
     "mkdocs-jupyter",
     "mkdocs-literate-nav",
+    "pymdown-extensions",
     ]
 description = "QEX QuantumDevOps"
 keywords = ["quantum devops"]

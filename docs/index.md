@@ -8,7 +8,7 @@ QEX (Quantum Excellence Centre) is a European Quantum Centre of Excellence fun
 ## What is DevOps?
 A cultural and professional movement that merges software development (Dev) and IT operations (Ops) to deliver software faster, more reliably, and with continuous feedback.
 
-![quex_devops](./qdevops.png)
+![quex_devops](./qdevops_2.png)
 
 ## Core Principles
 | Principle | Brief Description |
